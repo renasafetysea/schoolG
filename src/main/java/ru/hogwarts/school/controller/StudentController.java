@@ -20,7 +20,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("{id}") // GET http://localhost:8080/student/1
+    @GetMapping("{id}") // GET http://localhost:5432/student/1
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
         Student student = studentService.findStudent(id);
         if (student == null) {
@@ -28,17 +28,18 @@ public class StudentController {
         }
         return ResponseEntity.ok(student);
     }
-    @GetMapping // GET http://localhost:8080/students
-    public ResponseEntity<Collection<Student>> getAllStudent(){
+
+    @GetMapping // GET http://localhost:5432/students
+    public ResponseEntity<Collection<Student>> getAllStudent() {
         return (ResponseEntity<Collection<Student>>) studentService.getAllStudent();
     }
 
-    @PostMapping // POST http://localhost:8080/students
+    @PostMapping // POST http://localhost:5432/students
     public Student createStudent(@RequestBody Student student) {
         return studentService.addStudent(student);
     }
 
-    @PutMapping // PUT http://localhost:8080/students
+    @PutMapping // PUT http://localhost:5432/students
     public ResponseEntity<Student> editStudent(@RequestBody Student student) {
         Student foundStudent = studentService.editStudent(student);
         if (foundStudent == null) {
@@ -47,9 +48,16 @@ public class StudentController {
         return ResponseEntity.ok(foundStudent);
     }
 
-    @DeleteMapping("{id}") // DELETE http://localhost:8080/student/1
+    @DeleteMapping("{id}") // DELETE http://localhost:5432/student/1
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("{age}")
+    public ResponseEntity<Collection<Student>> filterByAge(@PathVariable int age) {
+        if (age > 0) {
+            return ResponseEntity.ok((Collection<Student>) studentService.filterByAge(age));
+        }
+        return ResponseEntity.ok(Collections.emptyList());
     }
 }

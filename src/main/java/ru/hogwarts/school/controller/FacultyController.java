@@ -1,3 +1,5 @@
+package ru.hogwarts.school.controller;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,7 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
-    @GetMapping("{id}") // GET http://localhost:5432/faculty/1
+    @GetMapping("{id}") // GET http://localhost:8080/faculty/1
     public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
         Faculty faculty = facultyService.findFaculty(id);
         if (faculty == null) {
@@ -25,8 +27,9 @@ public class FacultyController {
         }
         return ResponseEntity.ok(faculty);
     }
-    @GetMapping // GET http://localhost:5432/facultys
-    public ResponseEntity<Collection<Faculty>> getAllFaculty(){
+
+    @GetMapping // GET http://localhost:8080/facultys
+    public ResponseEntity<Collection<Faculty>> getAllFaculty() {
         return (ResponseEntity<Collection<Faculty>>) facultyService.getAllFaculty();
     }
 
@@ -49,5 +52,11 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }
-
-}
+    @GetMapping("{color}")
+    public ResponseEntity<Collection<Faculty>> filterByColor(@PathVariable String color) {
+        if (color != null && !color.isBlank()) {
+            return ResponseEntity.ok((Collection<Faculty>) facultyService.filterByColor(color));
+        }
+        return ResponseEntity.ok(Collections.emptyList());
+    }
+    }
