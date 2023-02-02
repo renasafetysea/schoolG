@@ -5,17 +5,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
+import ru.hogwarts.school.service.FacultyServiceImpl;
 
 import java.util.Collection;
 import java.util.Collections;
 
 @RestController
-@RequestMapping("faculty")
+@RequestMapping("/faculty")
 public class FacultyController {
 
-    private final FacultyService facultyService;
+    private final FacultyServiceImpl facultyService;
 
-    public FacultyController(FacultyService facultyService) {
+    public FacultyController(FacultyServiceImpl facultyService) {
         this.facultyService = facultyService;
     }
 
@@ -58,5 +59,14 @@ public class FacultyController {
             return ResponseEntity.ok((Collection<Faculty>) facultyService.filterByColor(color));
         }
         return ResponseEntity.ok(Collections.emptyList());
+    }
+    @GetMapping("{faculty}")
+    public ResponseEntity <Faculty> findFacultyByNameOrColor(@RequestParam(required = false) String name,
+                                                            @RequestParam(required = false) String color) {
+        Faculty foundFaculty = facultyService.findFacultyByNameOrColor(name, color);
+        if (foundFaculty == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(foundFaculty);
     }
     }

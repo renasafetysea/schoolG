@@ -42,6 +42,12 @@ public class FacultyServiceImpl implements FacultyService {
 
         return facultyRepository.findByColor(color);
     }
+    public Faculty findFacultyByNameOrColor(String name, String color) {
+        if (!(name == null || name.isBlank())) {
+            color = null;
+        }
+        return facultyRepository.findFacultyByNameIgnoreCaseOrColorIgnoreCase(name, color);
+    }
 }
 
 
