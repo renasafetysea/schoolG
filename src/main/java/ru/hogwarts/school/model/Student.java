@@ -12,6 +12,9 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
+    public Long getFacultyId() {
+        return faculty.getId();
+    }
 
     public Student() {
 
