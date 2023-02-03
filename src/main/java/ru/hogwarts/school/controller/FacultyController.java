@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
 import ru.hogwarts.school.service.FacultyServiceImpl;
 
@@ -69,4 +70,12 @@ public class FacultyController {
         }
         return ResponseEntity.ok(foundFaculty);
     }
+    @GetMapping("students")
+    public ResponseEntity<Collection<Student>> getStudentsFromFaculty(@RequestParam Long id) {
+        if (facultyService.findFaculty(id) == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(facultyService.getStudentsFromFaculty(id));
+    }
+
     }

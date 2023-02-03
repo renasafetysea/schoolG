@@ -67,4 +67,13 @@ public class StudentController {
                                                                        @RequestParam int max) {
         return ResponseEntity.ok(studentService.findStudentByAgeBetween(min, max));
     }
+    @GetMapping("faculty")
+    public ResponseEntity<Long> getFacultyOfStudent(@RequestParam Long id) {
+        Long foundFaculty = studentService.getFacultyIdOfStudent(id);
+        if (foundFaculty == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(foundFaculty);
+    }
+
 }
