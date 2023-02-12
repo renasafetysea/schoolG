@@ -19,6 +19,13 @@ public class Student {
     public Student() {
 
     }
+
+    public Student(String name, int age, Faculty faculty) {
+        this.name = name;
+        this.age = age;
+        this.faculty = faculty;
+    }
+
     public Student(Long id, String name, int age) {
         this.id = id;
         this.name = name;
