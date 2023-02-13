@@ -7,7 +7,6 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -42,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findAll();
     }
 
-    public List <Student> filterByAge(int age) {
+    public Collection<Student> filterByAge(int age) {
         return studentRepository.findByAge(age);
     }
 
@@ -54,8 +53,22 @@ public class StudentServiceImpl implements StudentService {
             return null;
         }
         return findStudent(id).getFacultyId();
+
     }
 
+    @Override
+    public int getNumberOfAllStudents() {
+        return studentRepository.getNumberOfAllStudents();
+    }
 
+    @Override
+    public int getAverageAge() {
+        return studentRepository.getAverageAge();
+    }
+
+    @Override
+    public Collection<Student> get5MaxId() {
+        return studentRepository.get5MaxId();
+    }
 }
 

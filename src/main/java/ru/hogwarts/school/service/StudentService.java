@@ -1,10 +1,8 @@
 package ru.hogwarts.school.service;
 
-import org.springframework.http.ResponseEntity;
 import ru.hogwarts.school.model.Student;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface StudentService {
     Student addStudent(Student student);
@@ -17,6 +15,11 @@ public interface StudentService {
 
      Collection<Student> getAllStudent();
 
-    List<Student> filterByAge(int age);
+    Collection<Student> filterByAge(int age);
+    int getNumberOfAllStudents() ;
+
+    int getAverageAge() ;
+
+    Collection<Student> get5MaxId();
 
 }
