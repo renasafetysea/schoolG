@@ -23,14 +23,14 @@ class SchoolGApplicationTests {
     private TestRestTemplate testRestTemplate;
 
     @Test
-    public void contextLoads() throws Exception{
+    public void contextLoads() throws Exception {
         Assertions.assertThat(studentController).isNotNull();
     }
 
     @Test
     public void testPostStudent() throws Exception {
         Faculty faculty = new Faculty();
-        Student student = new Student("New",19,faculty);
+        Student student = new Student("New", 19, faculty);
         Assertions.assertThat(this.testRestTemplate.postForEntity("http://localhost:" + port + "/student", student, String.class)
                 .getBody()).isNotEmpty();
     }

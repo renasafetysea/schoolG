@@ -22,33 +22,43 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyRepository.save(faculty);
     }
 
+
     public Faculty findFaculty(long id) {
         return facultyRepository.findById(id).get();
     }
+
 
     public Faculty editFaculty(Faculty faculty) {
 
         return facultyRepository.save(faculty);
     }
 
+
     public void deleteFaculty(long id) {
         facultyRepository.deleteById(id);
     }
+
 
     public Collection<Faculty> getAllFaculty() {
 
         return facultyRepository.findAll();
     }
+
+
     public List<Faculty> filterByColor(String color) {
 
         return facultyRepository.findByColor(color);
     }
+
+
     public Faculty findFacultyByNameOrColor(String name, String color) {
         if (!(name == null || name.isBlank())) {
             color = null;
         }
         return facultyRepository.findFacultyByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
+
+
     public Collection<Student> getStudentsFromFaculty(Long id) {
         return findFaculty(id).getStudents();
     }
