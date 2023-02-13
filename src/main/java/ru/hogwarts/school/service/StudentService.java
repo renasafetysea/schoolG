@@ -13,12 +13,13 @@ public interface StudentService {
 
     void deleteStudent(long id);
 
-     Collection<Student> getAllStudent();
+    Collection<Student> getAllStudent();
 
     Collection<Student> filterByAge(int age);
-    int getNumberOfAllStudents() ;
 
-    int getAverageAge() ;
+    int getNumberOfAllStudents();
+
+    int getAverageAge();
 
     Collection<Student> get5MaxId();
 
