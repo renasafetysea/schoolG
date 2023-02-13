@@ -22,32 +22,40 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.save(student);
     }
 
+
     public Student findStudent(long id) {
 
         return studentRepository.getById(id);
     }
+
 
     public Student editStudent(Student student) {
 
         return studentRepository.save(student);
     }
 
+
     public void deleteStudent(long id) {
         studentRepository.deleteById(id);
     }
+
 
     @Override
     public Collection<Student> getAllStudent() {
         return studentRepository.findAll();
     }
 
+
     public Collection<Student> filterByAge(int age) {
         return studentRepository.findByAge(age);
     }
 
+
     public Collection<Student> findStudentByAgeBetween(int min, int max) {
         return studentRepository.findStudentByAgeBetween(min, max);
     }
+
+
     public Long getFacultyIdOfStudent(Long id) {
         if (findStudent(id) == null) {
             return null;
@@ -56,19 +64,23 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
+
     @Override
     public int getNumberOfAllStudents() {
         return studentRepository.getNumberOfAllStudents();
     }
+
 
     @Override
     public int getAverageAge() {
         return studentRepository.getAverageAge();
     }
 
+
     @Override
     public Collection<Student> get5MaxId() {
         return studentRepository.get5MaxId();
     }
 }
+
 
