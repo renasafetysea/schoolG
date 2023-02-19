@@ -72,6 +72,11 @@ public class FacultyServiceImpl implements FacultyService {
         logger.debug("Method getStudentsFromFaculty was called");
         return findFaculty(id).getStudents();
     }
+    public List<String> longestTitleOfFaculty(){
+        int longTitle = facultyRepository.findAll().stream().
+                mapToInt(s -> s.getName().length()).max().orElseThrow();
+        return facultyRepository.findAll().stream().map(Faculty::getName).filter(s ->s.length() == longTitle).toList();
+    }
 }
 
 
